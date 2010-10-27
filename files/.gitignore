@@ -1,0 +1,3 @@
+# This file is just there to guarantee that the "files" directory will be empty in a commit.
+*
+!.gitignore
