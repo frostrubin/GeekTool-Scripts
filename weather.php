@@ -1,5 +1,40 @@
 #!/usr/bin/env php
 <?php
+//   This script tries to get your location by
+//   WLAN Name or the MAC address of your router.
+//   This way, weather can be displayed 
+//   according to your location!
+   
+//   1. Go to http://weather.yahoo.com and search for the city you want to monitor.
+//   2. Copy the URL; it should look similar to this:
+//      http://weather.yahoo.com/united-states/arkansas/washington-2514857/
+//      or http://weather.yahoo.com/germany/baden-wurttemberg/mannheim-673711/
+//   3. Append an ?unit=c or ?unit=f to the URL, so it looks similar to:
+//      http://weather.yahoo.com/united-states/arkansas/washington-2514857/?unit=f
+//      or http://weather.yahoo.com/germany/baden-wurttemberg/mannheim-673711/?unit=c
+//   4. Look at the SSIDs array. It contains the
+//      WLAN names, a short location name like "Frankfurt, Germany" and the 
+//      URL to the yahoo weather page of that location.
+//      Keep the pre-defined values to copy their syntax (this needs to be copied exactly!)
+//      and add your own WLAN name, city name and yahoo URL.
+//      "WUENSCH" is an example WLAN Name.
+//      "Mannheim, Germany" is an example City Location
+//      "http://weather.yahoo.com/germany/baden-wurttemberg/mannheim-673711/?unit=c" 
+//      is the corresponding weather url from yahoo (with temperatures in Celsius).   
+//   5. Change the paths of the image files (it's right below this text).
+//      Under these paths, the images of clouds and suns and stuff will be stored.
+//      Also, in the "weather.txt" file, the according texts will be stored as well.
+//   6. Add this Script to GeekTool multiple times!
+//      Once with the "get" parameter, once with the "info", once with "forecast1", etc.
+//   7. Also, add the generated image files to GeekTool
+   
+   
+//   Oh, by the way: if you happen to have no WLAN connection (at certain locations, or in general)
+//   Simply run the "mac" parameter to get the MAC Address of your current router. 
+//   In the SSIDs array, add it instead (or additionally) of the WLAN SSID.
+//   So if you move your laptop around, if the location can be found via SSID or used router
+//   The according weather information can be displayed.
+     
 //Setup
 $long_iconmap = '/Users/bernhard/.NerdTool/files/longIconMap.png';
 $current_icon = '/Users/bernhard/.NerdTool/files/current.png';
