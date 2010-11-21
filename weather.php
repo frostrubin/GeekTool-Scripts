@@ -54,7 +54,10 @@ $SSIDs = array(
                "unser netz" => array(1 => 'Reinheim, Germany', 2 => 'http://weather.yahoo.com/germany/hesse/reinheim-687697/?unit=c'),
                "0:15:c:6a:e1:b3" => array(1 => 'Reinheim, Germany', 2 => 'http://weather.yahoo.com/germany/hesse/reinheim-687697/?unit=c'),
                "0:11:9:af:c7:f2" => array(1 => 'Washington DC, USA', 2 => 'http://weather.yahoo.com/united-states/district-of-columbia/washington-2514815/?unit=f')
-               );  
+               ); 
+
+   $minMaxDelimiter = '/';   
+   
 function get_string_between($string, $start, $end){
    $string = " ".$string;
    $ini = strpos($string,$start);
@@ -473,7 +476,7 @@ function forecast1() {
    #echo $first_icon_high."\n";
    #echo $first_icon_low;
    if (strpos($first_icon_low,'ow:') != false) {
-      echo $first_icon_day."\n".str_replace('Low: ','',$first_icon_low).' - '.str_replace('&#176;','',$currenttemp).' - '.str_replace('High: ','',$first_icon_high);
+      echo $first_icon_day."\n".str_replace('Low: ','',$first_icon_low).$GLOBALS['minMaxDelimiter'].str_replace('&#176;','',$currenttemp).$GLOBALS['minMaxDelimiter'].str_replace('High: ','',$first_icon_high);
    } else {
       echo " ";
    }
@@ -486,7 +489,7 @@ function forecast2() {
    #echo $second_icon_high."\n";
    #echo $second_icon_low;
    if (strpos($second_icon_low,'ow:') != false) {
-      echo $second_icon_day."\n".str_replace('Low: ','',$second_icon_low).' - '.str_replace('High: ','',$second_icon_high);
+      echo $second_icon_day."\n".str_replace('Low: ','',$second_icon_low).$GLOBALS['minMaxDelimiter'].str_replace('High: ','',$second_icon_high);
    } else {
       echo " ";
    }
@@ -501,7 +504,7 @@ function forecast3() {
    $third_icon_day = longday($third_icon_day);
    
    if (strpos($third_icon_low,'ow:') != false) {
-      echo $third_icon_day."\n".str_replace('Low: ','',$third_icon_low).' - '.str_replace('High: ','',$third_icon_high);
+      echo $third_icon_day."\n".str_replace('Low: ','',$third_icon_low).$GLOBALS['minMaxDelimiter'].str_replace('High: ','',$third_icon_high);
    } else {
       echo " ";
    }
@@ -516,7 +519,7 @@ function forecast4() {
    $fourth_icon_day = longday($fourth_icon_day);
    
    if (strpos($fourth_icon_low,'ow:') != false) {
-      echo $fourth_icon_day."\n".str_replace('Low: ','',$fourth_icon_low).' - '.str_replace('High: ','',$fourth_icon_high);
+      echo $fourth_icon_day."\n".str_replace('Low: ','',$fourth_icon_low).$GLOBALS['minMaxDelimiter'].str_replace('High: ','',$fourth_icon_high);
    } else {
       echo " ";
    }
@@ -531,7 +534,7 @@ function forecast5() {
    $fifth_icon_day = longday($fifth_icon_day);
    
    if (strpos($fifth_icon_low,'ow:') != false) {
-      echo $fifth_icon_day."\n".str_replace('Low: ','',$fifth_icon_low).' - '.str_replace('High: ','',$fifth_icon_high);
+      echo $fifth_icon_day."\n".str_replace('Low: ','',$fifth_icon_low).$GLOBALS['minMaxDelimiter'].str_replace('High: ','',$fifth_icon_high);
    } else {
       echo " ";
    }
