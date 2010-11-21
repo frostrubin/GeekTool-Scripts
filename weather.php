@@ -459,7 +459,7 @@ function info() {
       $lastword = $out[count($out)-2].' '.$lastword;
    }
    
-   echo str_replace('  Forecasts','',$currentloc).', '.str_replace('CEST','',$asof)."\n";
+   echo str_replace('  Forecasts','',$currentloc).', '.str_replace('CEST','',str_replace('CET','',$asof))."\n";
    echo 'Wind: '.$wind."\n"; 
    echo 'H: '.$humidity.'%, '.'B: '.$lastword."\n";
    echo $currentcond."\n"; 
