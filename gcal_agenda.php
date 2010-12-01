@@ -64,11 +64,9 @@
          $startTime."|".
          $endDay."|".
          $endTime."|".
-         utf8_decode($entry->title);
-         
+         $entry->title;
          
       }
-      
       
    }
    
@@ -91,8 +89,6 @@
          $stringData = '    ';
       }
       
-      $event = str_replace('amp;','',$event);
-      
       echo $stringData;
       fwrite($fh, $stringData);
       
@@ -112,6 +108,7 @@
       echo "\n";  
       fwrite($fh, "\n");
    }  
+   
    
    
    fclose($fh);
