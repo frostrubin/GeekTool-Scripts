@@ -667,6 +667,11 @@
     # Get Geolocation with CoreLocation
     $CoreLocation = shell_exec('./CoreLocationCLI -once');
     echo $CoreLocation;
+    $pos = strpos($CoreLocation,'ERROR');
+    if ($pos === true) { 
+      echo "Error whilst getting Lat Long with CoreLocation";
+      return '';
+    }
     $arr['lat']  = get_string_between($CoreLocation, '<', ',');
     $arr['long'] = get_string_between($CoreLocation, ',', '>');
     # Remove unwanted characters
@@ -703,7 +708,10 @@
       // No Location was found via SSID or MAC
       // Let's try CoreLocation
       $location = get_location_by_corelocation();
-      
+      if (!is_array($location)) {
+        echo "Exiting...";
+        exit;
+      }
       $weather = yahoo_weather_by_latlong($location['lat'],$location['long']);
       if (is_array($weather)) {
         echo "Yahoo HTML Weather by Lat Long found";
