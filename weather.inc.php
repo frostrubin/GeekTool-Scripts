@@ -251,9 +251,13 @@
     
     $forecasts = get_string_between($string, '<tr class="fiveday-icons">','<td rowspan="2" class="extended">');
     
+    
+    $forecasts = ereg_replace("\n", " ", $forecasts);
+    $forecasts = ereg_replace("\r", " ", $forecasts);
     $forecasts = str_replace('- ','',$forecasts);
     $forecasts = str_replace('<img id="wiff" style="background-position: ',"\n",$forecasts);
     $forecasts = str_replace('T-storms','Gewitter',$forecasts); //Only to remove the "-"
+
     
     
     $first_icon_position = strpos($forecasts,'-');
@@ -287,8 +291,8 @@
     $forecasts = substr_replace($forecasts,'',strpos($forecasts,'-'),20);
     
     
-    
-    
+
+
     $forecasts = str_replace('Gewitter','T-storms',$forecasts);
     $first_icon_condition = strpos($forecasts,'<br/>');
     $first_icon_condition = substr($forecasts,$first_icon_condition,50);
@@ -423,6 +427,7 @@
     $weather[5]['low'] = trim($fifth_icon_low);
     $weather[5]['icon'] = $fifth_icon_position;  
     
+    # print_r($weather);
     return $weather;
   }
   
@@ -517,7 +522,7 @@
     if ($day != 0) {
       // Array position 0 is always Today. So let's start with a real forecast.
       echo short_to_long_weekday($arr[$day]['weekday'])."\n";
-      echo $arr[$day]['condition']."\n";
+      echo str_replace('/',"/\n",$arr[$day]['condition'])."\n";
       if (strlen($arr[$day]['low']) < 4) {
         echo 'Low: '.$arr[$day]['low']."\n";
       } else {
