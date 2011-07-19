@@ -121,6 +121,7 @@
   function google_weather_by_address($address) {
     
     # Get Google Weather by Address
+    $address = str_replace(' ','%20',$address);
     $GoogleWeatherByAddressURL = 'http://www.google.com/ig/api?weather='.$address;
     $GoogleWeatherByAddress = download_url($GoogleWeatherByAddressURL);
     return parse_google_weather_xml($GoogleWeatherByAddress);
@@ -700,7 +701,7 @@
       } else {
         echo "Weather Gets Downloaded from Google via Address from SSIDs Array";
         //We have an Address
-        $weather = google_weather_by_address($location['URL']);
+        $weather = google_weather_by_address($location['ADR']);
         write_array_to_file($weather,$GLOBALS['weather_file']);
         get_weather_icons($weather);
       }
