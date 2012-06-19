@@ -5,11 +5,11 @@ pass="passw0rd"  # Fritz!Box password
 storage="/tmp/anrufliste.xml"
 
 if [ -n "$2" ] || [ -z "$1" ]; then
-  echo 'usage: anrufliste.sh {get|type|date|time|datetime|name|number|duration}'
+  echo 'usage: anrufliste.sh {get|type|date|time|datetime|name|number|duration|html}'
   exit 1
 fi
 
-if [ "$1" == "get" ]; then
+if [ "$1" == "get" ] || [ "$1" == "html" ]; then
   # Get the Fritzbox Password
   pass=$(security 2>&1 >/dev/null find-generic-password -gs Fritz.BoxPassword | cut -d '"' -f 2|sed s/\\\\012/\\\\n/g)
 
@@ -24,11 +24,17 @@ if [ "$1" == "get" ]; then
   if [ $sid = "0000000000000000" ]; then
     exit 1
   fi
-
-  curl -s -d "sid=$sid&getpage=../html/de/home/foncallsdaten.xml" "$webcm" > "$storage"
-  chmod 600 "$storage"
-  curl -s -d "security:command/logout=1&sid=$sid" "$webcm" > /dev/null
-  exit 0
+  
+  if [ "$1" == "html" ];then
+    time=$(date "+%a. %d %B %H:%M")    
+    curl -s -d "sid=$sid&getpage=../html/de/home/foncallsdaten.xml" "$webcm" | xsltproc fritzbox_anrufliste_filter.xslt - |sed s,SETDATEANDTIME,"$time",
+    curl -s -d "security:command/logout=1&sid=$sid" "$webcm" > /dev/null
+    exit 0
+  fi
+    curl -s -d "sid=$sid&getpage=../html/de/home/foncallsdaten.xml" "$webcm" > "$storage"
+    chmod 600 "$storage"
+    curl -s -d "security:command/logout=1&sid=$sid" "$webcm" > /dev/null
+    exit 0  
 fi
 
 if [ "$1" == "type" ];then
