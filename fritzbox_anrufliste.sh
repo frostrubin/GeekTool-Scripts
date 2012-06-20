@@ -29,6 +29,10 @@ if [ "$1" == "get" ] || [ "$1" == "html" ]; then
   if [ $sid = "0000000000000000" ]; then
     exit 1
   fi
+
+  # Artificially Call up the "Display phone connections" menu. This actualizes the phone call xml. 
+  # Otherwise, the xml would be stuck at the time when the connections list was last viewed via the web interface
+  curl -s -d "sid=$sid&getpage=../html/de/menus/menu2.html&amp;sid=29679290e21942c5&amp;var:menu=fon&amp;var:pagename=foncalls" "$webcm" > /dev/null
   
   if [ "$1" == "html" ];then
     time=$(date "+%a. %d %B %H:%M")    
