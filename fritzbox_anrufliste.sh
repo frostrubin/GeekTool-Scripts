@@ -10,6 +10,11 @@ if [ -n "$2" ] || [ -z "$1" ]; then
 fi
 
 if [ "$1" == "get" ] || [ "$1" == "html" ]; then
+  mac=`arp "$fburl"|cut -d ' ' -f 4`
+  if [ "$mac" != "c0:25:6:98:90:77" ]; then # Restrict this whole script to my home router
+    exit 0
+  fi
+
   # Get the Fritzbox Password
   pass=$(security 2>&1 >/dev/null find-generic-password -gs Fritz.BoxPassword | cut -d '"' -f 2|sed s/\\\\012/\\\\n/g)
 
