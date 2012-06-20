@@ -22,7 +22,7 @@ if [ "$1" == "get" ] || [ "$1" == "html" ]; then
 
   challenge=`curl -s "$webcm?getpage=../html/login_sid.xml" | grep "Challenge" | awk -F '>' '{print $2}' | awk -F '<' '{print $1}'`
 
-  encpass=`echo -n "$challenge-$pass" | perl -pe 's/(.)/\1\0/gs'  | md5 | awk '{print $1}'`
+  encpass=`echo -n "$challenge-$pass" | perl -pe 's/(.)/\1\0/gs'  |md5 | awk '{print $1}'`
   logintoken="$challenge-$encpass"
   sid=`curl -s -d "login:command/response=$logintoken&getpage=../html/login_sid.xml" "$webcm" | grep SID | awk -F '>' '{print $2}' | awk -F '<' '{print $1}'`
 
