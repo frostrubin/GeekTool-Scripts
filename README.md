@@ -10,3 +10,6 @@ To use the scripts:
   2. Change paths that are hard-coded in the files (needed for things like images)
   3. Change certain info contained in the file (locations for weather-display)
   4. Run the scripts. Their output will tell you what to do.
+
+## Tips
+ - If you want anti-aliased fonts in GeekTool, use shadows. Shadows force anti-aliasing. Go to the fonts window and set the shadow slider to nearly zero.
