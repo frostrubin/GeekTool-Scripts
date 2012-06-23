@@ -20,6 +20,7 @@ inbox_feed="https://mail.google.com/mail/feed/atom/inbox"
 
 function output() {
    echo "<?php echo html_entity_decode( '""$variable""' );?>"| /usr/bin/env php
+   echo -ne "\n"
 }
 
 if [ -n "$2" ] || [ -z "$1" ]; then
@@ -108,7 +109,7 @@ if [ "$1" == "getmail" ];then
 
   easy_output=$(echo "$mail"| tr -d '\n' | awk -F '<entry>' '{for (i=2; i<=NF; i++) {print $i}}' | perl -pe 's/^<title>(.*)<\/title>.*<name>(.*)<\/name>.*$/$2 - $1/')
 
-  echo -e "$account You have $mail_count emails\n"
+  echo -e "$account You have $mail_count new emails\n"
   variable="$titles";
   variable="$authors";
   variable="$easy_output";  
