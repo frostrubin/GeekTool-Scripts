@@ -4,7 +4,8 @@
 # for another label, change the "inbox_feed" variable and 
 # replace "inbox" with the label name.
 
-# This script uses oauth 2.0, which is why you do not have to enter a password
+# Written by Bernhard Seeger
+# This script uses OAuth 2.0, which is why you do not have to enter a password
 # directly in the script!
 
 # Run "gmail.sh init" and the script will walk you through.
@@ -17,11 +18,6 @@ redirect_uri="urn:ietf:wg:oauth:2.0:oob"
 scope="https://mail.google.com/mail/feed/atom"
 
 inbox_feed="https://mail.google.com/mail/feed/atom/inbox"
-
-function output() {
-   echo "<?php echo html_entity_decode( '""$variable""' );?>"| /usr/bin/env php
-   echo -ne "\n"
-}
 
 if [ -n "$2" ] || [ -z "$1" ]; then
   echo 'usage: gmail.sh {init|getmail}'; exit 1
@@ -98,20 +94,31 @@ if [ "$1" == "getmail" ];then
 
   access_token=$(echo "$oauth_response"|grep "access_token"|cut -c21-400|sed -e 's/",//g')
   mail=$(curl -s -H "Authorization: OAuth $access_token" "$inbox_feed")
- 
-  account=$(echo "$mail"|xpath /feed/title 2>/dev/null|sed -e 's, ,\\\n,g')
-  account=$(echo -ne "$account"|sed -e 's,</title>,,g'|tail -n 1)
-  mail_count=$(echo "$mail"|xpath "count(/feed/entry/title)" 2>/dev/null)
-  titles=$(echo "$mail"|xpath /feed/entry/title 2>/dev/null|sed -e 's,</title><title>,\\\n,g')
-  titles=$(echo -e "$titles"|sed -e 's/<title>//'|sed 's/\(.*\)<\/title>/\1/')  
-  authors=$(echo "$mail"|xpath /feed/entry/author/name 2>/dev/null|sed -e 's,</name><name>,\\\n,g')
-  authors=$(echo -e "$authors"|sed -e 's/<name>//'|sed 's/\(.*\)<\/name>/\1/')
 
-  easy_output=$(echo "$mail"| tr -d '\n' | awk -F '<entry>' '{for (i=2; i<=NF; i++) {print $i}}' | perl -pe 's/^<title>(.*)<\/title>.*<name>(.*)<\/name>.*$/$2 - $1/')
+  account=$(echo "$mail"|xpath /feed/title 2>/dev/null|rev|sed -e 's,>eltit/<,,'|awk '{print $1}'|rev) 
+  mail_count=$(echo "$mail"|xpath "count(/feed/entry/title)" 2>/dev/null)  
+  authors=$(echo "$mail"| tr -d '\n' | awk -F '<entry>' '{for (i=2; i<=NF; i++) {print $i}}' | perl -pe 's/^<title>(.*)<\/title>.*<name>(.*)<\/name>.*$/$2/')
+  authors=$(php -r "echo html_entity_decode( \"$authors\" );")
+  titles=$(echo "$mail"| tr -d '\n' | awk -F '<entry>' '{for (i=2; i<=NF; i++) {print $i}}' | perl -pe 's/^<title>(.*)<\/title>.*<name>(.*)<\/name>.*$/$1/')
+  titles=$(php -r "echo html_entity_decode( \"$titles\" );")
+  number_of_lines=$(echo "$authors"|wc -l)
 
-  echo -e "$account You have $mail_count new emails\n"
-  variable="$titles";
-  variable="$authors";
-  variable="$easy_output";  
-  output
+  longest_author=$(echo "$authors"|awk '{ if (length($0) > max) {max = length($0); maxline = $0} } END { print maxline }')
+  max_length=$(echo "$longest_author"|wc -m 2>/dev/null)
+  let max_length=max_length+2
+  
+  echo "$account you have $mail_count new mails"
+  echo " "
+  COUNTER=1
+  while [  $COUNTER -le "$number_of_lines" ]; do
+    current_author=$(echo "$authors"|sed -n "$COUNTER"p)
+    current_length=$(echo "$current_author"|wc -m 2> /dev/null)
+    while [ $current_length -lt "$max_length" ]; do
+      current_author=$(echo -n "$current_author";echo -n " ")
+      current_length=$(echo "$current_author"|wc -m 2> /dev/null)
+    done
+    current_title=$(echo "$titles"|sed -n "$COUNTER"p)
+    echo "$current_author""$current_title"
+    let COUNTER=COUNTER+1 
+  done
 fi
