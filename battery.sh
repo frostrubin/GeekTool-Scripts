@@ -10,7 +10,7 @@ function graphical_battery {
    ESC=`printf "\e"`
 
    # Get current capacity
-   variable=`system_profiler SPPowerDataType | egrep -e "Charge remaining|Full charge capacity" | sed -e 's/[A-Za-z]//g;s/()://g' | sed -e 's/^[ \t]*//'`
+   variable=`system_profiler SPPowerDataType| egrep -e "Charge Remaining|Full Charge Capacity" | sed -e 's/[A-Za-z]//g;s/()://g' | sed -e 's/^[ \t]*//'`
    remaining=`echo $variable | awk '{print $1}'`
    full=`echo $variable | awk '{print $2}'`
 
@@ -60,7 +60,7 @@ function graphical_battery {
 }
 
 function info {
-   system_profiler SPPowerDataType | egrep -e "Connected|Charge remaining|Full charge capacity|Condition|Cycle count" | sed -e 's/^[ \t]*//'
+   system_profiler SPPowerDataType | egrep -e "Connected|Charge Remaining|Full Charge Capacity|Condition|Cycle Count" | sed -e 's/^[ \t]*//'
 }
 
 function connected {
@@ -68,11 +68,11 @@ function connected {
 }
 
 function remaining {
-   system_profiler SPPowerDataType | grep "Charge remaining"|sed 's/[^0-9]*//g'
+   system_profiler SPPowerDataType | grep "Charge Remaining"|sed 's/[^0-9]*//g'
 }
 
 function full_capacity {
-   system_profiler SPPowerDataType | grep "Full charge capacity"|sed 's/[^0-9]*//g'
+   system_profiler SPPowerDataType | grep "Full Charge Capacity"|sed 's/[^0-9]*//g'
 }
 
 function condition {
@@ -80,7 +80,7 @@ function condition {
 }
 
 function cycle_count {
-   system_profiler SPPowerDataType | grep "Cycle count"|sed 's/[^0-9]*//g'
+   system_profiler SPPowerDataType | grep "Cycle Count"|sed 's/[^0-9]*//g'
 }
 
 function percent {

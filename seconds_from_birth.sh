@@ -9,4 +9,4 @@
 birthseconds=`date -j 081309281988.44 +%s`
 nowseconds=`date +%s`
 
-echo $(($nowseconds-$birthseconds))
+echo You are $(($nowseconds-$birthseconds)) seconds old
