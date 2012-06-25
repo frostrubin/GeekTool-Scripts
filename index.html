@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="GeekTool Scripts : " />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>GeekTool Scripts</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/frostrubin/GeekTool-Scripts">View on GitHub</a>
+
+          <h1 id="project_title">GeekTool Scripts</h1>
+          <h2 id="project_tagline"></h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/frostrubin/GeekTool-Scripts/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/frostrubin/GeekTool-Scripts/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>Welcome to GeekTool Scripts</h2>
+
+<p>On this Page you can find a couple of my Desktop Scripts that can be used with <a href="http://itunes.apple.com/us/app/geektool/id456877552">GeekTool</a> or <a href="http://mutablecode.com/apps/nerdtool">NerdTool</a> or <a href="http://conky.sourceforge.net/">Conky</a>.</p>
+
+<p>Essentially, these are small shell scripts that display bits of information: Current free HDD space, Temperature, Weather, etc.</p>
+
+<p>The vast majority is text-only, but a couple of scripts can also save save image files that then can be displayed.</p>
+
+<p>To use the scripts:</p>
+
+<ol>
+<li>Download the compressed file (or clone the repo)</li>
+<li>Change paths that are hard-coded in the files (needed for things like images)</li>
+<li>Change certain info contained in the file (eg. IP Addresses or URLs)</li>
+<li>Run the scripts. Their output will tell you what to do.</li>
+</ol><h2>The Battery script</h2>
+
+<p>The <code>battery.sh</code> script has a bunch of different options. Most notable are <code>graphical</code> and <code>info</code>. You can use the <code>battery.png</code> image to give the graphical representation a nice border...
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/battery_graphical.png" alt="Battery Graphical"><img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/battery_info.png" alt="Battery Info"></p>
+
+<h2>Your age in seconds</h2>
+
+<p>The script <code>seconds_from_birth.sh</code> contains comments how you have to format your birthday for it to work correctly.
+Here is an example output:
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/age_in_seconds.png" alt="Age in Seconds"></p>
+
+<h2>Analog ASCII Clock</h2>
+
+<p>The script <code>clock_ascii.pl</code> takes a width and a height parameter and outputs a clock in ASCII Characters.
+At first it looks really crude, but if you make play with width, height and font-size, it can look quite compelling.
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/clock_ascii.png" alt="Clock ASCII"></p>
+
+<h2>Gmail Script</h2>
+
+<p>The <code>gmail.sh</code> script uses OAUTH 2.0 to connect to google and all passwords are stored in the OS X Keychain. It has an <code>init</code> parameter with which it has to be run once from the Terminal.
+Afterwards it can be used in GeekTool with the <code>getmail</code> parameter.
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/gmail_getmail.png" alt="Gmail Mail"></p>
+
+<h2>Calendar</h2>
+
+<p>The <code>calendar.sh</code> has a multitude of options. Use <code>-c</code> to have the current day colored, <code>-m</code> to have the calendar start on mondays. If you want to influence the coloring and are not too comfortable with editing the script, use the <code>xyz_gap</code> and <code>xyz_date</code> options and create two scripts: one does show the current date, the other the rest of the calendar. This way, you can even use different fonts for the current date.
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/calendar_1.png" alt="Calendar 1"><img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/calendar_2.png" alt="Calendar 2"><img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/calendar_3.png" alt="Calendar 3"><img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/calendar_4.png" alt="Calendar 4"></p>
+
+<h2>Fuzzy Time</h2>
+
+<p>The <code>fuzzytime.php</code> script outputs the time in a more "spoken" way.
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/fuzzy_time.png" alt="Fuzzy Time"></p>
+
+<h2>Clock Images</h2>
+
+<p>The <code>clock_images.php</code> script can be run with different options do output a "station clock" like image that can include, seconds, minutes, hours and clock hands. Each Option creates it's own image.
+It's worth looking into the source - there you can change the default colors (default is all white with the current hour blue). Lay multiple images over one another to have a nice GeekTool Clock or stack them inside one another (hours-&gt;minutes-&gt;seconds) to have a "ring" clock.
+If you don't mind the CPU cycles, set the <code>seconds</code> option as well as the output of the resulting image to refresh every second - this produces a "ticking" clock image.
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/clock_images.png" alt="Ring Clock"></p>
+
+<h2>Mac Temperatures</h2>
+
+<p>The <code>temperatures.sh</code> Script uses the <code>tempmonitor</code> binary from <a href="http://www.bresink.com/osx/0TemperatureMonitor/download.php5">Temperature Monitor</a>. To get and use it, follow the comment instructions inside the script.
+In order to see any output in GeekTool, be sure to set the output encoding to ASCII.
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/temperatures.png" alt="Temperatures"></p>
+
+<h2>HDD Space</h2>
+
+<p>The <code>hddspace.sh</code> script can display the information either in one package, or separated by volumes and sizes. This allows for different colors.
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/hddspace_one.png" alt="HDD Space One"><img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/hddspace_colors.png" alt="HDD Space Colors"></p>
+
+<h2>Network Access</h2>
+
+<p>The <code>network.sh</code> script can display, which services are currently connecting to the internet, 
+your IP Addresses in horizontal and vertical form and a list of nearby WLAN networks.
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/network_inet_access.png" alt="Network Inet Access"><img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/network_ips.png" alt="Network IPs"><img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/network_airports.png" alt="Network Airport List"></p>
+
+<h2>The Ribbon</h2>
+
+<p>The Ribbons are two images (one with an apple, one without) that can be placed "on top" of other windows and can look quite nice in the upper left corner.
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/ribbon_apple.png" alt="Ribbon Apple"></p>
+
+<h2>How to set up your own Gmail API Application</h2>
+
+<p>If you do not trust the gmail.sh script provided, or if you are just curious and want to tinker around:
+here is how you can set up your own \"Application\" for the Google API.</p>
+
+<ol>
+<li>Got to the <a href="https://code.google.com/apis/console/">Google API Console</a>
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/gmail_howto_1_google_api_console.png" alt="Google API Console">
+</li>
+<li>Choose \"API Access\" in the left hand column and the hit the big blue button
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/gmail_howto_2_create_oauth_application.png" alt="Create OAuth Application">
+</li>
+<li>Enter \"Branding Information\". This consists of an Application Name and an optional image
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/gmail_howto_3_create_branding_information.png" alt="Branding Information">
+</li>
+<li>Create a client ID. Different set-ups are possible - for GeekTool purposes, choose \"Offline\"
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/gmail_howto_4_create_client_id.png" alt="Create Client ID">
+</li>
+<li>Now you are good to go! You should be presented with an overview page that includes your credentials: Client ID, Client Secret and a Redirect URI
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/gmail_howto_5_credentials.png" alt="Credentials">
+</li>
+<li>When a user now tries to use your application, the will have to open a webpage and will be presented with a dialog like the one below
+<img src="https://github.com/frostrubin/GeekTool-Scripts/raw/master/example_screenshots/gmail_howto_6_permission_example.png" alt="Permission Dialog">
+</li>
+</ol>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">GeekTool Scripts maintained by <a href="https://github.com/frostrubin">frostrubin</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
